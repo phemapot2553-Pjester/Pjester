@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SentinelRBX Security Hub</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d16;
+      --surface: #111827;
+      --surface-hover: #1f293d;
+      --border: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent: #38bdf8;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+    }
+    .font-mono { font-family: var(--font-mono); }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .card:hover { border-color: var(--accent); }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col p-6 max-w-7xl mx-auto">
+  <!-- Header -->
+  <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-slate-800">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center shadow-lg shadow-sky-500/20 text-white font-bold text-xl">
+        🛡️
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-xl font-bold tracking-tight">SentinelRBX</h1>
+          <span class="text-xs px-2 py-0.5 rounded-full font-mono bg-sky-500/10 text-sky-400 border border-sky-500/20">v2.4 Live</span>
+        </div>
+        <p class="text-xs text-slate-400">Enterprise Roblox Anti-Exploit & Telemetry Security Hub</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 w-full md:w-auto justify-between md:justify-end">
+      <div class="px-3 py-1.5 rounded-lg card flex items-center gap-3 text-xs">
+        <div>
+          <div class="text-slate-400">Target: 30,000 THB/mo</div>
+          <div class="font-semibold text-emerald-400 font-mono">18,500 THB MRR (61%)</div>
+        </div>
+        <div class="w-16 bg-slate-800 rounded-full h-2 overflow-hidden border border-slate-700">
+          <div class="bg-emerald-500 h-full rounded-full" style="width: 61%"></div>
+        </div>
+      </div>
+
+      <button onclick="triggerAlert()" class="px-3 py-1.5 bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold text-xs rounded-lg transition shadow-lg shadow-sky-500/20 flex items-center gap-1.5">
+        <span>⚡ Simulate Telemetry</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 py-6 grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <!-- Left Stats -->
+    <div class="space-y-6">
+      <div class="grid grid-cols-2 lg:grid-cols-1 gap-4">
+        <div class="card p-4 rounded-xl">
+          <div class="text-xs text-slate-400 font-medium">Protected Studios</div>
+          <div class="text-2xl font-bold font-mono mt-1 text-white" id="stat-studios">14 Active</div>
+          <div class="text-xs text-emerald-400 mt-1">↑ +3 this week</div>
+        </div>
+        <div class="card p-4 rounded-xl">
+          <div class="text-xs text-slate-400 font-medium">Exploits Blocked (24h)</div>
+          <div class="text-2xl font-bold font-mono mt-1 text-sky-400" id="stat-blocked">1,428</div>
+          <div class="text-xs text-slate-400 mt-1">0 false positives</div>
+        </div>
+        <div class="card p-4 rounded-xl">
+          <div class="text-xs text-slate-400 font-medium">Active CCU Monitored</div>
+          <div class="text-2xl font-bold font-mono mt-1 text-purple-400" id="stat-ccu">42,500</div>
+          <div class="text-xs text-slate-400 mt-1">Across 18 servers</div>
+        </div>
+      </div>
+
+      <!-- Lua Snippet -->
+      <div class="card p-4 rounded-xl space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Lua Client Integration</h3>
+          <button onclick="copyCode()" class="text-xs text-sky-400 hover:underline">Copy</button>
+        </div>
+        <pre class="bg-slate-950 text-slate-300 p-3 rounded-lg text-[11px] font-mono overflow-x-auto border border-slate-800"><code>local Sentinel = require(script.SentinelCore)
+Sentinel.Init({
+    ApiKey = "sec_live_99a8bc",
+    AutoBan = true
+})</code></pre>
+      </div>
+    </div>
+
+    <!-- Right Stream -->
+    <div class="lg:col-span-3 space-y-6">
+      <div class="card p-4 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h2 class="text-sm font-bold flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Live Exploit & Telemetry Stream
+          </h2>
+          <p class="text-xs text-slate-400">Real-time event logging from Roblox game servers</p>
+        </div>
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <input type="text" id="search-input" onkeyup="renderLogs()" placeholder="Search logs..." class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-sky-500 w-full sm:w-48">
+          <select id="filter-type" onchange="renderLogs()" class="px-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white focus:outline-none focus:border-sky-500">
+            <option value="ALL">All Types</option>
+            <option value="REMOTE_SPAM">Remote Spam</option>
+            <option value="SPEED_HACK">Speed/Fly Hack</option>
+            <option value="DUPE_ATTEMPT">Currency Dupe</option>
+            <option value="DESERIALIZE">Data Tampering</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="card rounded-xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-800 text-xs text-slate-400 font-medium bg-slate-900/50">
+                <th class="p-3">Time</th>
+                <th class="p-3">Studio / Game</th>
+                <th class="p-3">Player ID</th>
+                <th class="p-3">Threat Type</th>
+                <th class="p-3">Payload Action</th>
+                <th class="p-3 text-right">Status</th>
+              </tr>
+            </thead>
+            <tbody id="log-tbody" class="text-xs divide-y divide-slate-800 font-mono">
+              <!-- Loaded via API -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let logsData = [];
+
+    async function fetchLogs() {
+      try {
+        const res = await fetch('/api/logs');
+        const data = await res.json();
+        logsData = data.logs;
+        document.getElementById('stat-blocked').innerText = data.metrics.blocked24h.toLocaleString();
+        renderLogs();
+      } catch (e) {
+        console.error('Failed to fetch logs:', e);
+      }
+    }
+
+    function renderLogs() {
+      const tbody = document.getElementById('log-tbody');
+      const search = document.getElementById('search-input').value.toLowerCase();
+      const typeFilter = document.getElementById('filter-type').value;
+
+      tbody.innerHTML = '';
+      const filtered = logsData.filter(log => {
+        const matchSearch = log.player.toLowerCase().includes(search) || log.studio.toLowerCase().includes(search) || log.type.toLowerCase().includes(search);
+        const matchType = typeFilter === 'ALL' || log.type === typeFilter;
+        return matchSearch && matchType;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">No telemetry events found.</td></tr>`;
+        return;
+      }
+
+      filtered.forEach(log => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/50 transition';
+        tr.innerHTML = `
+          <td class="p-3 text-slate-400">${log.time}</td>
+          <td class="p-3 font-sans font-medium text-white">${log.studio}</td>
+          <td class="p-3 text-sky-400 font-mono">${log.player}</td>
+          <td class="p-3 font-mono ${log.color}">${log.type}</td>
+          <td class="p-3 text-slate-400">${log.action}</td>
+          <td class="p-3 text-right">
+            <span class="px-2 py-0.5 rounded text-[10px] uppercase font-bold ${log.status === 'Banned' ? 'bg-rose-500/10 text-rose-400 border border-rose-500/20' : 'bg-sky-500/10 text-sky-400 border border-sky-500/20'}">${log.status}</span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    async function triggerAlert() {
+      const studios = ['Anime Legends X', 'Blox Fruits V2', 'Pet Simulator World', 'Blade Master RPG'];
+      const players = ['ScriptKiddie_01', 'HackerPro99', 'ExploitLua', 'BypassClient'];
+      const types = ['REMOTE_SPAM', 'SPEED_HACK', 'DUPE_ATTEMPT', 'DESERIALIZE'];
+      const actions = ['Permanent Server Ban', 'Auto-Blocked & Flagged', 'Position Rollback & Kick', 'Payload Rejected'];
+
+      const payload = {
+        apiKey: 'sec_live_99a8bc',
+        studio: studios[Math.floor(Math.random() * studios.length)],
+        player: players[Math.floor(Math.random() * players.length)],
+        type: types[Math.floor(Math.random() * types.length)],
+        action: actions[Math.floor(Math.random() * actions.length)],
+        status: Math.random() > 0.5 ? 'Banned' : 'Blocked'
+      };
+
+      try {
+        await fetch('/api/telemetry', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        fetchLogs();
+      } catch (e) {
+        console.error('Failed to send telemetry:', e);
+      }
+    }
+
+    function copyCode() {
+      navigator.clipboard.writeText('local Sentinel = require(script.SentinelCore)\nSentinel.Init({ ApiKey = "sec_live_99a8bc", AutoBan = true })');
+      alert('Lua snippet copied!');
+    }
+
+    setInterval(fetchLogs, 5000);
+    fetchLogs();
+  </script>
+</body>
+</html>
